@@ -18,15 +18,15 @@ int main() {
 
 	int max = 0;
 	int s1, s2; //ends of side1 and side2
-	char clr; //char we are searching for {r,b,w}
+	char clr; //clr searched for {r,b,w}
 	beads = beads + beads; //duplication creates pseudo-circular string
 
 	for (int i = 1; i < N * 2;) {  //skip thru split pt's P(x)
 		s2 = 0;
 		s1 = 0;
 		clr = beads[i];
-		for (int j = i; j < N * 2;) { //find longest segment going clockwise from split pt
-			if (clr == 'w' && beads[j] != 'w') clr = beads[j]; //if clr was 'w' but other color found, change to new colors
+		for (int j = i; j < N * 2;) { //find longest segment going clockwise
+			if (clr == 'w') clr = beads[j]; //if nonwhite found, clr will stay nonwhite
 			if (beads[j] == clr || beads[j] == 'w') {
 				s1++;
 				j++;
@@ -34,8 +34,8 @@ int main() {
 			else break;
 		}
 		clr = beads[i - 1];
-		for (int j = i - 1; j >= 0;) { //find longest segment going clockwise from split pt
-			if (clr == 'w' && beads[j] != 'w') clr = beads[j]; //if clr was 'w' but other color found, change to new colors
+		for (int j = i - 1; j >= 0;) { //find longest segment going clockwise
+			if (clr == 'w') clr = beads[j]; //if nonwhite found, clr will stay nonwhite
 			if (beads[j] == clr || beads[j] == 'w') {
 				s2++;
 				j--;
