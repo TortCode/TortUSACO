@@ -46,7 +46,7 @@ int main()
 		pp1 = abc * e; if (pp1 > 999) goto FAIL; //Calculation and Digit Length Check
 		pp2 = abc * d; if (pp2 > 999) goto FAIL;
 		sum = 10 * pp2 + pp1; if (sum > 9999) goto FAIL;
-		//brackets circumvent GOTO init skipping
+		//brackets circumvent GOTO declaration skipping
 		{
 			int curDigit; //for operation of EXTRACTandCHECK_DIGIT
 			int ct;
