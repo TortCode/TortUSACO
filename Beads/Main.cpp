@@ -15,17 +15,17 @@ int main() {
 	input >> N;
 	input >> beads;
 	input.close();
-
-	int max = 0;
-	int s1, s2; //ends of side1 and side2
-	char clr; //clr searched for {r,b,w}
-	
 	beads = beads + beads; //duplication creates pseudo-circular string
 	int len = N * 2;
-	for (int i = 1; i < len; i += s1) {  //skip to next forward each time
+
+	int max = 0;
+	int s1, s2, sum; //ends of side1 and side2 and sum
+	char clr; //clr searched for {r,b,w}
+
+	for (int i = 1; i < len; i += s1) { //skip to end of forward segment each time
 		s2 = 0;
 		s1 = 0;
-		
+
 		clr = beads[i];
 		for (int j = i; j < len; j++) { //forwards
 			if (clr == 'w') clr = beads[j];
@@ -33,7 +33,7 @@ int main() {
 			if (beads[j] == clr || beads[j] == 'w') s1++;
 			else break;
 		}
-		
+
 		clr = beads[i - 1];
 		for (int j = i - 1; j >= 0; j--) { //backwards
 			if (clr == 'w') clr = beads[j];
@@ -42,7 +42,7 @@ int main() {
 			else break;
 		}
 
-		max = s1 + s2 > max ? s1 + s2 : max; //get new max
+		if ((sum = s1 + s2) > max) max = sum; //get new max
 	}
 	if (max > N) max = N;
 	ofstream output("beads.out");
