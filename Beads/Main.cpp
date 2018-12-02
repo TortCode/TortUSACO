@@ -22,7 +22,7 @@ int main() {
 	
 	beads = beads + beads; //duplication creates pseudo-circular string
 	int len = N * 2;
-	for (int i = 1; i < len; i += s1) {  //go to end of fo
+	for (int i = 1; i < len; i += s1) {  //skip to next forward each time
 		s2 = 0;
 		s1 = 0;
 		
