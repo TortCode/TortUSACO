@@ -90,9 +90,8 @@ int main()
 				if (portal == i) { //back at start
 					solutions++;
 					doesInfLoop = true;
-					break;
 				}
-			} while (true);
+			} while (!doesInfLoop);
 			if (doesInfLoop) break;
 		}
 	}
