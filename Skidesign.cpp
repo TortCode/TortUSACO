@@ -10,7 +10,6 @@ LANG: C++
 int N;
 
 struct Hill {
-
 	int orig, height, change;
 	void reset()
 	{
