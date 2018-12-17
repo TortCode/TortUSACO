@@ -20,13 +20,12 @@ void generatePartition(int elem, grouping pairs)
 		PartitionList.push_back(pairs);
 	}
 	for (byte i = 0; i < halfN; i++) {
-		byte& usage = usedInPair[i];
-		if (usage == 2) continue; //if pair filled SKIP
+		if (usedInPair[i] == 2) continue; //if pair filled SKIP
 		pairs[elem] = i;
-		usage++;
+		usedInPair[i]++;
 		generatePartition(elem + 1, pairs);
-		usage--;
-		if (usage == 0) break; //if empty pair reached STOP
+		usedInPair[i]--;
+		if (usedInPair[i] == 0) break; //if empty pair reached STOP
 	}
 }
 
