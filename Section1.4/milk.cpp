@@ -29,7 +29,7 @@ int main()
 
 	int unitsNeeded = N;
 	int cost = 0;
-	for (int i = 0; unitsNeeded != 0; i++) {
+	for (int i = 0; i < M; i++) {
 		Farmer f = supply[i];
 		if (unitsNeeded < f.amount) { //if buying all too much, buy whatever needed
 			cost += unitsNeeded * f.price;
