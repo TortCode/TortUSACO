@@ -17,8 +17,7 @@ int main()
 	fin.close();
 
 	int doublePalCount = 0; //counts how many nums so far are double palindromes
-	for (int test = S + 1; doublePalCount != N; test++) {
-
+	for (int test = S + 1; doublePalCount < N; test++) {
 		int palCheck = 0; //count how in how base is palindromic
 		for (int base = 2; base <= 10; base++) {
 			string convert = "";
@@ -38,17 +37,13 @@ int main()
 					break;
 				}
 			}
-			if (isPal) {
-				palCheck++;
-				if (palCheck == 2) break;
-			}
-		}
-
-		if (palCheck == 2) {
-			doublePalCount++;
-			fout << test << endl;
+			if (isPal)
+				if (++palCheck == 2) { //increment
+					doublePalCount++;
+					fout << test << endl;
+					break;
+				}
 		}
 	}
-
 	fout.close();
 }
