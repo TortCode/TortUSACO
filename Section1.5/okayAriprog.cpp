@@ -7,15 +7,13 @@ LANG: C++
 #include <bitset>
 
 int N, M; //len of seq; parameter for set of bisquares
-int maxBisquare;
 std::bitset<125001> bisquares; //if bisquares[i] then i is bisquare
 
-inline bool seqExists(const int& a, const int& b)
+inline bool seqExists(int term, const int& b)
 {
-	int term = a;
 	for (int n = 1; n < N; n++) {
 		term += b;
-		if (term > maxBisquare || !bisquares[term]) return false;
+		if (!bisquares[term]) return false;
 	}
 	return true;
 }
@@ -27,19 +25,21 @@ int main()
 	input >> N >> M;
 	input.close();
 
-	maxBisquare = 2 * M * M;
 	//generate bisquares
 	for (int p = 0; p <= M; p++) {
 		for (int q = 0; q <= p; q++) {
 			bisquares[p * p + q * q] = true;
 		}
 	}
-	
-	int sol = 0;
+
+	const int maxBisquare = 2 * M * M;
 	const int maxB = maxBisquare / (N - 1);
+
+	int sol = 0, maxA;
 	for (unsigned int b = 1; b <= maxB; b++) {
-		for (unsigned int a = 0; a <= maxBisquare; a++) {
-			if (bisquares[a] && (a+(N-1)*b) <= maxBisquare))
+		maxA = maxBisquare - (N - 1) * b;
+		for (unsigned int a = 0; a <= maxA; a++) {
+			if (bisquares[a])
 				if (seqExists(a, b)) {
 					output << a << " " << b << std::endl;
 					sol++;
