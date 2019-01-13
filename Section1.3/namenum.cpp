@@ -6,7 +6,7 @@ LANG: C++
 #include <fstream>
 #include <string>
 #include <vector>
-#include <array>
+#include <tuple>
 #include <map>
 using namespace std;
 
@@ -15,7 +15,7 @@ int main()
 	ifstream fin("namenum.in");
 	ifstream dict("dict.txt");
 	ofstream fout("namenum.out");
-	map<char, array<char, 3>> Keypad = {
+	map<char, tuple<char, 3>> Keypad = {
 		{'2',{'A','B','C'}},
 		{'3',{'D','E','F'}},
 		{'4',{'G','H','I'}},
