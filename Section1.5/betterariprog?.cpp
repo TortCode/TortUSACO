@@ -37,7 +37,7 @@ int main()
 	
 	int sol = 0;
 	const int maxB = maxBisquare / (N - 1);
-	for (unsignt int b = 1; b <= maxB; b++) {
+	for (unsigned int b = 1; b <= maxB; b++) {
 		for (unsigned int a = 0; a <= maxBisquare; a++) {
 			if (bisquares[a] && (a+(N-1)*b) <= maxBisquare))
 				if (seqExists(a, b)) {
