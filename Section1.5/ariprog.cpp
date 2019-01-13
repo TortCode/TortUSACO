@@ -38,7 +38,7 @@ int main()
 		}
 	}
 	
-	const int maxB = 2 * M * M / (N - 1);
+	const int maxB = maxBisquare / (N - 1);
 	for (unsigned int a = 0; a <= maxBisquare; a++) {
 		if (bisquares[a])
 			for (unsigned int j = a + 1; j <= maxBisquare; j++) {
