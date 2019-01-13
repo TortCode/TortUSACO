@@ -4,8 +4,6 @@ PROG: ariprog
 LANG: C++
 */
 #include <fstream>
-#include <algorithm>
-#include <vector>
 #include <bitset>
 
 int N, M; //len of seq; parameter for set of bisquares
@@ -37,18 +35,17 @@ int main()
 		}
 	}
 	
-  int sol = 0;
+	int sol = 0;
 	const int maxB = maxBisquare / (N - 1);
-  for (unsignt int b = 1; b <= maxB; b++) {
-	  for (unsigned int a = 0; a <= maxBisquare; a++) {
-		  if (bisquares[a] && (a+(N-1)*b) <= maxBisquare))
-				  if (seqExists(a, b)) {
-					  output << a << " " << b << std::endl;
-            sol++;
-          }
-    }
-  }
-
+	for (unsignt int b = 1; b <= maxB; b++) {
+		for (unsigned int a = 0; a <= maxBisquare; a++) {
+			if (bisquares[a] && (a+(N-1)*b) <= maxBisquare))
+				if (seqExists(a, b)) {
+					output << a << " " << b << std::endl;
+					sol++;
+				}
+		}
+	}
 	if (sol == 0) {
 		output << "NONE" << std::endl;
 	}
