@@ -17,9 +17,9 @@ int main()
 		input >> values[i];
 		keyCount[values[i]]++;
 	}
+	
 	short end1 = keyCount[1];
 	short end2 = end1 + keyCount[2];
-
 	short valPositions[4][4]{ 0 }; //[value][region]
 	for (short i = 0; i < end1; i++) //allocated to 1s
 		valPositions[values[i]][1]++;
