@@ -16,7 +16,6 @@ void visit(int i, int j, int compID)
 	if (components[i][j] != 0) return;
 	components[i][j] = compID;
 	compSizes[compID]++;
-
 	if (!(modules[i][j] & 0b1000)) visit(i + 1, j, compID); //S
 	if (!(modules[i][j] & 0b0100)) visit(i, j + 1, compID); //E
 	if (!(modules[i][j] & 0b0010)) visit(i - 1, j, compID); //N
@@ -37,7 +36,7 @@ int main()
 	int curComponent = 0;
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= M; j++) {
-			if (components[i][j] == 0) {
+			if (components[i][j] == 0) { //not visited
 				compSizes.push_back(0);
 				visit(i, j, ++curComponent);
 			}
@@ -51,7 +50,6 @@ int main()
 
 	short maxCreated = 0;
 	pair<pair<int, int>, char>  maxLoc; //<i,j>, direc
-
 	short createdSize;
 	for (int j = 1; j <= M; j++) {
 		for (int i = N; i >= 1; i--) {
