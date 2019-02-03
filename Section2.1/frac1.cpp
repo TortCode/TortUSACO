@@ -10,14 +10,11 @@ using namespace std;
 
 struct Fraction {
 	short num, denom;
-
 	Fraction(short n, short d) : num(n), denom(d) {} 
-
 	bool operator==(const Fraction &rhs)
 	{
 		return (num * rhs.denom) == (denom * rhs.num);
 	}
-
 	static bool lessThan(const Fraction &lhs, const Fraction &rhs)
 	{
 		return (lhs.num * rhs.denom) < (lhs.denom * rhs.num);
@@ -54,7 +51,7 @@ int main()
 	sort(fractions.begin(), fractions.end(), Fraction::lessThan);
 
 	ofstream output("frac1.out");
-	for (const Fraction &f : fractions)
+	for (Fraction f : fractions)
 		output << f.num << '/' << f.denom << '\n';
 	output.close();
 }
