@@ -4,7 +4,7 @@ LANG: JAVA
 TASK: ride
  */
 import java.io.*;
-public class ride {
+public class ride { //this is stupid; java is ridiculous in terms of file IO
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader("ride.in"));
