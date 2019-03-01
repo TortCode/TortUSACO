@@ -19,12 +19,13 @@ int main()
 		output.close();
 		return 0;
 	}
-	for (int last = 1; last <= n; last++) //last integer in set considered
+	for (int last = 1; last <= n; last++) {//last integer in set considered
 		int bigSum = last*(last+1)/4;
 		for (int sum = 0; sum < bigSum; sum++)
 			poss[last][sum] = poss[last-1][sum]		//last excluded
 			+ (last <= sum) ? poss[last-1][sum-last] : 0;	//last included
+	}
 	
-	output << poss[sum][n*(n+1)/4] / 2 << '\n';
+	output << poss[n][n*(n+1)/4] / 2 << '\n';
 	output.close();
 }
