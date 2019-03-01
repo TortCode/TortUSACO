@@ -4,23 +4,12 @@ PROG: subset
 LANG: C++
 */
 #include <fstream>
-#include <algorithm>
 using namespace std;
-
-int n;
-unsigned int poss[40][391];
-
-unsigned int getPoss(int start, int sum)
-{
-	if (start < 0 || sum < 0) return 0;
-	if (poss[start][sum] == -1) poss[start][sum] = getPoss(start - 1, sum) + getPoss(start - 1, sum - start);
-	return poss[start][sum];
-}
 
 int main()
 {
-	fill(poss[0], poss[0] + 40 * 391, -1); 
-	poss[0][0] = 1;
+	int n;
+	unsigned int poss[39+1][390+1]{{1}};
 	ifstream input("subset.in");
 	ofstream output("subset.out");
 	input >> n;
@@ -30,7 +19,12 @@ int main()
 		output.close();
 		return 0;
 	}
-	unsigned int possSum = getPoss(n, n*(n + 1) / 4);
-	output << possSum / 2 << '\n';
+	for (int last = 1; last <= n; last++) //last integer in set considered
+		int bigSum = last*(last+1)/4;
+		for (int sum = 0; sum < bigSum; sum++)
+			poss[last][sum] = poss[last-1][sum]		//last excluded
+			+ (last <= sum) ? poss[last-1][sum-last] : 0;	//last included
+	
+	output << poss[sum][n*(n+1)/4] / 2 << '\n';
 	output.close();
 }
