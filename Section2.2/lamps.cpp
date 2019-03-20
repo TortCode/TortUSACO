@@ -26,7 +26,7 @@ struct State {
 	{
 		State st = *this;
 		int len = st.lamps.size();
-		for (int i = 1; i < len; i += 2) st.lamps[i-1] = !st.lamps[i-1];
+		for (int i = 1; i <= len; i += 2) st.lamps[i-1] = !st.lamps[i-1];
 		st.ct++;
 		return st;
 	}
@@ -34,7 +34,7 @@ struct State {
 	{
 		State st = *this;
 		int len = st.lamps.size();
-		for (int i = 2; i < len; i += 2) st.lamps[i-1] = !st.lamps[i-1];
+		for (int i = 2; i <= len; i += 2) st.lamps[i-1] = !st.lamps[i-1];
 		st.ct++;
 		return st;
 	}
@@ -42,7 +42,7 @@ struct State {
 	{
 		State st = *this;
 		int len = st.lamps.size();
-		for (int i = 1; i < len; i += 3) st.lamps[i-1] = !st.lamps[i-1];
+		for (int i = 1; i <= len; i += 3) st.lamps[i-1] = !st.lamps[i-1];
 		st.ct++;
 		return st;
 	}
