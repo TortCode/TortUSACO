@@ -14,7 +14,7 @@ void searchComponent(int pasture)
 		searchComponent(other);
 }
 
-int main()
+int main() //BUG: does not check for the impossible case
 {
 	int n, m;
 	ifstream input("revegetate.in");
@@ -28,7 +28,6 @@ int main()
 	}
 	input.close();
 
-	//find num of components
 	int ncomponent = 0;
 	for (int i = 1; i <= n; i++) {
 		if (!visited[i]) {
