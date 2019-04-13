@@ -3,6 +3,8 @@ ID: teerth.1
 PROG: nocows
 LANG: C++
 */
+//LOOK AWAY THIS IS A CATASTROPHE NOT MEANT FOR HUMAN EYES
+//RUNTIME IS HORRIBLE, FOUR LAYERS OF NESTING, CLUNKY TRANSITIONS WITH UNNEEDED STATE PARAMETER
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -29,11 +31,10 @@ int main() {
 	for (int n = 1; n <= nodes; n += 2) {
 		for (int h = 1; h < height; ++h) {
 			for (int lv = 1; lv <= 200; ++lv) {
-				for (int k = 1; k <= lv; ++k) { //add k groups to bottom
-					if ((n + 2 * k <= nodes) && 2 * k <= 200)
-						dp[n + 2 * k][h + 1][2 * k] =
-							(C[lv][k] * dp[n][h][lv]
-							+ dp[n + 2 * k][h + 1][2 * k]) % 9901;
+				for (int k = 1; k <= lv && (n + 2 * k <= nodes) && 2 * k <= 200; ++k) { //add k groups to bottom
+					dp[n + 2 * k][h + 1][2 * k] =
+						(C[lv][k] * dp[n][h][lv]
+						+ dp[n + 2 * k][h + 1][2 * k]) % 9901;
 				}
 			}
 		}
