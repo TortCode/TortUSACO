@@ -3,8 +3,10 @@ ID: teerth.1
 PROG: nocows
 LANG: C++
 */
-//LOOK AWAY THIS IS A CATASTROPHE NOT MEANT FOR HUMAN EYES
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//LOOK AWAY, THIS IS A CATASTROPHE NOT MEANT FOR HUMAN EYES THAT USES PASCAL'S TRIANGLE SMH
 //RUNTIME IS HORRIBLE, FOUR LAYERS OF NESTING, CLUNKY TRANSITIONS WITH UNNEEDED STATE PARAMETER
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include <iostream>
 #include <fstream>
 using namespace std;
