@@ -19,7 +19,8 @@ psi run_together(int n)
 {
 	string s = to_string(n);
 	int sum = n;
-	for (int i = n + 1; i <= N && oper[i] == 0; i++) {
+	int i;
+	for (i = n + 1; i <= N && oper[i] == 0; i++) {
 		sum = sum * 10 + i;
 		s += " " + to_string(i);
 	}
@@ -57,6 +58,7 @@ int main()
 				sum -= var.second;
 				s += "-" + var.first;
 			}
+			loc++;
 		}
 		//output
 		if (sum == 0)
