@@ -10,7 +10,8 @@ LANG: C++
 #include <utility>
 using namespace std;
 typedef pair<string, int> psi;
-int N, loc;
+int N;
+int loc; //global position within tested sequence.
 int oper[10]; //starts at 2, goes to 9
 //0is_ 1is+ 2is-
 
@@ -21,8 +22,8 @@ psi run_together(int n)
 	for (int i = n + 1; i <= N && oper[i] == 0; i++) {
 		sum = sum * 10 + i;
 		s += " " + to_string(i);
-		loc = i;
 	}
+	loc = i;
 	return psi(s, sum);
 }
 
@@ -49,14 +50,17 @@ int main()
 			if (oper[loc] == 2) {
 				var = run_together(loc);
 				sum += var.second;
+				s += "+" + var.first;
 			}
 			if (oper[loc] == 3) {
 				var = run_together(loc);
+				sum -= var.second;
+				s += "-" + var.first;
 			}
 		}
+		//output
+		if (sum == 0)
+			output << s << '\n';
 	}
-
-	for (string s : seqs)
-		output << s << '\n';
 	output.close();
 }
