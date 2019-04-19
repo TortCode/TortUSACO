@@ -5,7 +5,6 @@ LANG: C++
 */
 #include <fstream>
 #include <cmath>
-#include <vector>
 #include <string>
 #include <utility>
 using namespace std;
@@ -15,6 +14,7 @@ int loc; //global position within tested sequence.
 int oper[10]; //starts at 2, goes to 9
 //0is_ 1is+ 2is-
 
+//get "term" of seq starting at n
 psi run_together(int n)
 {
 	string s = to_string(n);
@@ -30,7 +30,6 @@ psi run_together(int n)
 
 int main()
 {
-	vector<string> seqs;
 	ifstream input("zerosum.in");
 	ofstream output("zerosum.out");
 	input >> N;
@@ -48,17 +47,16 @@ int main()
 		string s = init.first;
 		while (loc <= N) {
 			psi var;
-			if (oper[loc] == 2) {
+			if (oper[loc] == 1) {
 				var = run_together(loc);
 				sum += var.second;
 				s += "+" + var.first;
-			}
-			if (oper[loc] == 3) {
+			} 
+			else if (oper[loc] == 2) {
 				var = run_together(loc);
 				sum -= var.second;
 				s += "-" + var.first;
 			}
-			loc++;
 		}
 		//output
 		if (sum == 0)
