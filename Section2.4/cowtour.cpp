@@ -3,15 +3,15 @@ ID: teerth.1
 PROG: cowtour
 LANG: C++
 */
+// help its borken
+// just like me
 #include <fstream>
 #include <iomanip>
 #include <cmath>
 #include <string>
 #include <vector>
 using namespace std;
-
 int N;
-
 struct Point {
 	int x, y;
 } vertex[150];
@@ -23,6 +23,7 @@ double distance(Point a, Point b)
 	int dy = a.y - b.y;
 	return sqrt(dx * dx + dy * dy);
 }
+
 int main()
 {
 	ifstream input("cowtour.in");
@@ -42,12 +43,10 @@ int main()
 		}
 	}
 	// Floyd-Warshall
-	for (k = 0; k < N; k++)
-		for (i = 0; i < N; i++)
-			for (j = 0; j < i; j++)
-				if (dist[i][k] + dist[k][j] < dist[i][j]) {
-					dist[i][j] = dist[j][i] = dist[i][k] + dist[k][j];
-				}
+	for (k = 0; k < N; k++) for (i = 0; i < N; i++) for (j = 0; j < i; j++)
+		if (dist[i][k] + dist[k][j] < dist[i][j])
+			dist[i][j] = dist[j][i] = dist[i][k] + dist[k][j];
+	
 	vector<vector<int>> components;
 	int cmp = 0;
 	for (i = 0; i < N; i++) {
@@ -84,9 +83,8 @@ int main()
 		sz1 = components[i].size();
 		for (k = 0; k < i; k++) {
 			sz2 = components[k].size();
-			for (j = 0; j < sz1; j++)
-				for (l = 0; l < sz2; l++)
-					min = fmin(min, maxDist[i][j] + distance(vertex[components[i][j]], vertex[components[k][l]]) + maxDist[k][l]);
+			for (j = 0; j < sz1; j++) for (l = 0; l < sz2; l++)
+				min = fmin(min, maxDist[i][j] + distance(vertex[components[i][j]], vertex[components[k][l]]) + maxDist[k][l]);
 		}
 	}
 	output << fixed;
