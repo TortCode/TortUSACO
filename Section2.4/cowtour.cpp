@@ -3,8 +3,8 @@ ID: teerth.1
 PROG: cowtour
 LANG: C++
 */
-// help its borken
-// just like me
+// ok it works now
+// but its full of ugly vectors
 #include <fstream>
 #include <iomanip>
 #include <cmath>
@@ -46,7 +46,7 @@ int main()
 	for (k = 0; k < N; k++) for (i = 0; i < N; i++) for (j = 0; j < i; j++)
 		if (dist[i][k] + dist[k][j] < dist[i][j])
 			dist[i][j] = dist[j][i] = dist[i][k] + dist[k][j];
-	
+
 	vector<vector<int>> components;
 	int cmp = 0;
 	for (i = 0; i < N; i++) {
@@ -65,6 +65,7 @@ int main()
 	for (i = 0; i < CMPSZ; i++)
 		maxDist.push_back(vector<double>(components[i].size()));
 	double max;
+	double greatCis = 0;
 	int sz1, sz2;
 	for (k = 0; k < CMPSZ; k++) {
 		vector<int> &v = components[k];
@@ -74,6 +75,7 @@ int main()
 			for (j = 0; j < sz1; j++)
 				max = fmax(max, dist[v[i]][v[j]]);
 			maxDist[k][i] = max;
+			greatCis = fmax(greatCis, max);
 		}
 
 	}
@@ -89,5 +91,5 @@ int main()
 	}
 	output << fixed;
 	output << setprecision(6);
-	output << min << '\n';
+	output << fmax(greatCis,min) << '\n';
 }
