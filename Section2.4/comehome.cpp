@@ -6,9 +6,7 @@ LANG: C++
 #include <fstream>
 #include <set>
 #include <algorithm>
-#include <vector>
 #include <utility>
-#include <functional>
 #define INF 10000000
 #define VERTICES 52
 using namespace std;
@@ -57,6 +55,7 @@ int main()
 		visited[node] = true;
 		for (int adj = 0; adj < VERTICES; adj++)
 			if (dist[adj] > dist[node] + weight[node][adj]) {
+				// replace longer distance w shorter
 				if (dist[adj] != INF)
 					minHeap.erase(minHeap.find({ dist[adj], adj }));
 				dist[adj] = dist[node] + weight[node][adj];
@@ -66,9 +65,8 @@ int main()
 	// get fastest cow
 	int fast = 0;
 	for (int i = 0; i < Z; i++)
-		if (dist[i] < dist[fast]) {
+		if (dist[i] < dist[fast])
 			fast = i;
-		}
 
 	output << (char)(fast + 'A') << " " << dist[fast] << endl;
 }
