@@ -12,7 +12,7 @@ using namespace std;
 
 int A, B, N;
 int patterns[12][1 << 12]; // (length - 1), sequence value
-struct Sequence {int length, value;};
+struct Sequence {int freq, length, value;};
 string toBinaryString(Sequence s) {
 	int x = s.value;
 	string ret;
@@ -48,34 +48,38 @@ int main()
 	for (i = A - 1; i <= B - 1; i++)
 		for (j = 0; j < (1 << 12); j++)
 			if (patterns[i][j] > 0)
-				possible.push_back({ i + 1,patterns[i][j] });
-	sort(possible.begin(), possible.end(), [](Sequence a, Sequence b) {
-		return a.value > b.value;
+				possible.push_back({patterns[i][j], i + 1, j });
+	sort(possible.begin(), possible.end(), [&](Sequence a, Sequence b) {
+		if(a.freq == b.freq) {
+			if (a.length == b.length)
+				return a.value < b.value;
+			return a.length < b.length;
+		}
+		return a.freq > b.freq;
 	});
 	if (possible.size() > N)
 		possible.resize(N);
-	sort(possible.begin(), possible.end(), [](Sequence a, Sequence b) {
-		if (a.length == b.length)
-			return a.value < b.value;
-		return a.length > b.length;
-	});
 
-	int len = -1;
+	int freq = -1;
 	int ct = 0;
 	// FINISH OUTPUT RIGHT HERE
 	for (Sequence s : possible) {
-		if (len != s.length) {
-			len = s.length;
+		// new frequency class
+		if (freq != s.freq) {
+			if (ct > 0) output << "\n";
+			freq = s.freq;
 			output << len << "\n";
 			ct = 0;
 		}
-		output << toBinaryString(s);
-		ct++;
-		if (ct == 6) {
+		if (ct == 6) { //line used up
 			output << "\n";
 			ct = 0;
+		} else if (ct > 0) { 
+			output << " ";
 		}
+		output << toBinaryString(s);
+		ct++;
 	}
-
+	output << "\n";
 	return 0;
 }
