@@ -4,36 +4,33 @@ PROG: humble
 LANG: C++
 */
 #include <fstream>
-#include <set>
 #include <algorithm>
+#include <climits>
 using namespace std;
 #define MAXPRIME 100
-
-int primes[MAXPRIME];
+#define MAXHUMBLE 100'000
 int N, K;
-set<long long int> humbles;
+int primes[MAXPRIME];
+int minIndex[MAXPRIME];
+long humbles[MAXHUMBLE];
 
-long int getHumble(int n)
+long getHumble(int n)
 {
 	int i, j;
-	long long int min, max;
-	for (i = 1;; i++) {
-		min = *humbles.begin();
-		humbles.erase(humbles.begin());
-		if (i == n) return min;
-		if (min*primes[0] > *humbles.end()) {
-			i++;
-			break;
-		}
+	long max;
+	long minAboveMax;
+	int prime;
+	for (i = 1; i <= n; i++) {
+		max = humbles[i - 1];
+		minAboveMax = LONG_MAX;
 		for (j = 0; j < K; j++) {
-			humbles.insert(min*primes[j]);
+			prime = primes[j];
+			while (prime * humbles[minIndex[j]] <= max) minIndex[j]++;
+			minAboveMax = min(minAboveMax, prime * humbles[minIndex[j]]);
 		}
+		humbles[i] = minAboveMax;
 	}
-	for (;; i++) {
-		min = *humbles.begin();
-		humbles.erase(humbles.begin());
-		if (i == n) return min;
-	}
+	return humbles[n];
 }
 
 int main()
@@ -41,12 +38,11 @@ int main()
 	ifstream input("humble.in");
 	ofstream output("humble.out");
 	input >> K >> N;
-	for (int i = 0; i < K; i++) {
+	for (int i = 0; i < K; i++)
 		input >> primes[i];
-		humbles.insert(primes[i]);
-	}
 	input.close();
 	sort(primes, primes + K);
+	humbles[0] = 1;
 
 	output << getHumble(N) << endl;
 }
