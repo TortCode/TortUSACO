@@ -25,25 +25,26 @@ int main()
 	ifstream input("contact.in");
 	ofstream output("contact.out");
 	input >> A >> B >> N;
-	string seq, s;
+	string s, temp;
 	while (!input.eof()) {
-		input >> s;
-		seq += s;
+		input >> temp;
+		s += temp;
 	}
-	int size = seq.size;
-	bitset<200'000> emission(seq);
+	int size = s.size;
+	bitset<200'000> emission(s);
 
 	int i, j;
 
 	for (i = 0; i < size; i++) {
 		int sum = 0;
-		for (j = 0; j < B; j++) {
+		for (j = 0; j < B && i + j < size; j++) {
 			sum << 1;
 			sum += emission[i+j];
 			patterns[j][sum]++;
 		}
 	}
-
+	
+	// find N most frequent seqs
 	vector<Sequence> possible;
 	for (i = A - 1; i <= B - 1; i++)
 		for (j = 0; j < (1 << 12); j++)
@@ -63,21 +64,21 @@ int main()
 	int freq = -1;
 	int ct = 0;
 	// FINISH OUTPUT RIGHT HERE
-	for (Sequence s : possible) {
+	for (Sequence seq : possible) {
 		// new frequency class
-		if (freq != s.freq) {
+		if (freq != seq.freq) {
 			if (ct > 0) output << "\n";
-			freq = s.freq;
-			output << len << "\n";
+			freq = seq.freq;
+			output << freq << "\n";
 			ct = 0;
 		}
 		if (ct == 6) { //line used up
 			output << "\n";
 			ct = 0;
-		} else if (ct > 0) { 
+		} else if (ct > 0) { //another seq precedes
 			output << " ";
 		}
-		output << toBinaryString(s);
+		output << toBinaryString(seq);
 		ct++;
 	}
 	output << "\n";
