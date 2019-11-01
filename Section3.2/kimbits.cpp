@@ -7,7 +7,6 @@ LANG: C++
 #include <string>
 using namespace std;
 
-
 int numstrings[32][32]; // [l,c] -> numstrings of length l and at most c set bits
 int pos[32]; // position of 1s
 
@@ -27,22 +26,10 @@ int generate(){
 			numstrings[n][k] = numstrings[n][k-1] + combo[n][k];
 	}
 }
-	
-int N, L, I;
-string toBinaryString(int n)
-{
-	string ret;
-	while (n != 0) {
-		ret = to_string(n & 1) + ret;
-		n >>= 1;
-	}
-	while (ret.length() < N)
-		ret = "0" + ret;
-	return ret;
-}
 
 int main()
 {
+	int N, L, I;
 	ifstream input("kimbits.in");
 	ofstream output("kimbits.out");
 	input >> N >> L >> I;
