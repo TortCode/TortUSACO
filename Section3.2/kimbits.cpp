@@ -7,17 +7,38 @@ LANG: C++
 #include <string>
 using namespace std;
 
-int numSet(int n) {
-	int i = 0;
-	while (n != 0) {
-		i += n & 1;
-		n >>= 1;
-	}
-	return i;
-}
+int combo[32][32];
+int numstrings[32][32];
+int pos[32]; // position of 1s
 
+int generate(){
+{
+	combo[0][0] = 1;
+	int n, k;
+	for (n = 0; n <= 31; n++) {
+		combo[n][0] = 1;
+		combo[n][n] = 1;
+		numstrings[n][0] = 1;
+		for (k = 1; k < n; k++) {
+			combo[n][k] = combo[n - 1][k - 1] + combo[n - 1][k];
+			numstrings[n][k] = numstrings[n][k - 1] + combo[n][k];
+		}
+		numstrings[n][n] = numstrings[n][n - 1] + 1;
+	}
+}
 int N, L, I;
-string toBinaryString(int n) {
+
+int find(int index, )
+{
+	int i = 1;
+	int k = 0;
+	int len = L;
+	while (index != 1) {
+		while (index > numstrings[k][)
+	}
+}
+string toBinaryString(int n)
+{
 	string ret;
 	while (n != 0) {
 		ret = to_string(n & 1) + ret;
@@ -35,16 +56,8 @@ int main()
 	input >> N >> L >> I;
 	input.close();
 
-	int num = 0;
-	for (int i = 0;;) {
-		if (numSet(num) <= L) {
-			i++;
-		}
-		if (i == I)
-			break;
-		num++;
-	}
 
-	output << toBinaryString(num) << endl;
+
+	output << toBinaryString(ret) << endl;
 	output.close();
 }
