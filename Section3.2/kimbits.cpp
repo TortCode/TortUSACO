@@ -7,12 +7,13 @@ LANG: C++
 #include <string>
 using namespace std;
 
-int combo[32][32];
-int numstrings[32][32];
+
+int numstrings[32][32]; // [l,c] -> numstrings of length l and at most c set bits
 int pos[32]; // position of 1s
 
 int generate(){
 {
+	int combo[32][32];
 	combo[0][0] = 1;
 	int n, k;
 	for (n = 0; n <= 31; n++) {
@@ -26,17 +27,8 @@ int generate(){
 		numstrings[n][n] = numstrings[n][n - 1] + 1;
 	}
 }
+	
 int N, L, I;
-
-int find(int index, )
-{
-	int i = 1;
-	int k = 0;
-	int len = L;
-	while (index != 1) {
-		while (index > numstrings[k][)
-	}
-}
 string toBinaryString(int n)
 {
 	string ret;
@@ -56,6 +48,13 @@ int main()
 	input >> N >> L >> I;
 	input.close();
 
+	int index = I;
+	for(int i = 0, k = 0, len = L; index != 1; len--, i++) {
+		k = 0;
+		while (index > numstrings[k][len]) k++;
+		pos[i] = k;
+		index -= numstrings[k-1][len];
+	}
 
 
 	output << toBinaryString(ret) << endl;
