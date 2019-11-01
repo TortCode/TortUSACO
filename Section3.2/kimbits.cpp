@@ -48,6 +48,8 @@ int main()
 	input >> N >> L >> I;
 	input.close();
 
+	generate();
+	
 	int index = I;
 	for(int i = 0, k = 0, len = L; index != 1; len--, i++) {
 		k = 0;
