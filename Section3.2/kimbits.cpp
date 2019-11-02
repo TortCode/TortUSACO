@@ -13,6 +13,7 @@ int pos[32]; // position of 1s
 
 void generate()
 {
+	// numstrings[n][k] = sum from i=0 to k of nCi
 	int n, k;
 	for (n = 0; n <= 31; n++) {
 		combo[n][0] = 1;
@@ -47,6 +48,7 @@ int main()
 		index -= numstrings[k - 1][bits];
 	}
 
+	// place bits based on positions obtained earlier
 	string ret;
 	int strindex = 1;
 	for (int i = 31; i >= 0; i--) {
