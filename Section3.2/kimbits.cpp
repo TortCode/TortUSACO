@@ -40,12 +40,12 @@ int main()
 	generate();
 
 	unsigned index = I;
+	int k = 31;
 	for (int i = 0, bits = L; index != 1; bits--, i++) {
 		// all strings with length k-1 are less than string with bit set at k
-		int k = 0;
-		while (index > numstrings[k][bits]) k++;
-		pos[i] = k;
-		index -= numstrings[k - 1][bits];
+		while (index <= numstrings[k][bits]) k--;
+		pos[i] = k+1;
+		index -= numstrings[k][bits];
 	}
 
 	// place bits based on positions obtained earlier
