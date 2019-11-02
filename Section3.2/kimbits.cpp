@@ -22,7 +22,7 @@ int generate(){
 	}
 	for (n = 0; n <= 31; n++) {
 		numstrings[n][0] = 1;
-		for (k = 1; k <= n; k++)
+		for (k = 1; k <= 31; k++)
 			numstrings[n][k] = numstrings[n][k-1] + combo[n][k];
 	}
 }
