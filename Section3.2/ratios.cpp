@@ -47,10 +47,10 @@ int main()
 					optimal = Triple(i, j, k);
 				}
 			}
-
+	Triple total = r1*optimal.a + r2*optimal.b + r3.optimal.c;
 	if (minSum == 0)
 		output << "NONE\n";
 	else
 		output << optimal.a << " " << optimal.b << " " << optimal.c << " "
-		<< (r1.a * optimal.a + r2.a * optimal.b + r3.a * optimal.c) / goal.a << "\n";
+		<< (total.a + total.b + total.c) / (goal.a + goal.b + goal.c) << "\n";
 }
