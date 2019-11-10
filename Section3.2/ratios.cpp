@@ -37,19 +37,19 @@ int main()
 	input >> r3.a >> r3.b >> r3.c;
 
 	int i, j, k;
-	int min = 0;
+	int minSum = 0;
 	Ratio3 optimal;
 	for (i = 0; i < 100; i++)
 		for (j = 0; j < 100; j++)
 			for (k = 0; k < 100; k++) {
 				mixes[i][j][k] = r1 * i + r2 * j + r3 * k;
-				if ((min == 0 || i + j + k < min) && mixes[i][j][k].isMultiple(goal)) {
-					min = i + j + k;
+				if ((minSum == 0 || i + j + k < minSum) && mixes[i][j][k].isMultiple(goal)) {
+					minSum = i + j + k;
 					optimal = Ratio3(i, j, k);
 				}
 			}
 
-	if (min == 0)
+	if (minSum == 0)
 		output << "NONE\n";
 	else
 		output << optimal.a << " " << optimal.b << " " << optimal.c << " " 
