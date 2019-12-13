@@ -8,7 +8,7 @@ LANG: C++
 #include <algorithm>
 #include <cmath>
 
-int noffers, nbuys;
+int noffers, nbuys, six_to_nbuys;
 
 struct Offer {
 	int items[5]{};
@@ -21,7 +21,7 @@ int count = 0;
 int purchase[5];
 
 int minprice[6][6][6][6][6];
-bool isValid(int a, int b, int c, int d, int e)
+inline bool isValid(int a, int b, int c, int d, int e)
 {
 	return a <= 5
 		&& b <= 5
@@ -29,22 +29,26 @@ bool isValid(int a, int b, int c, int d, int e)
 		&& d <= 5
 		&& e <= 5;
 }
-int dp()
+
+void dp()
 {
-	int sixpow = std::pow(6, nbuys);
 	int a, b, c, d, e;
 	int na, nb, nc, nd, ne;
 	for (Offer o : offers) {
-		for (int i = 0; i < sixpow; ++i) {
-			a = i % 6; i /= 6;
-			b = i % 6; i /= 6;
-			c = i % 6; i /= 6;
-			d = i % 6; i /= 6;
-			e = i % 6; i /= 6;
+		for (int i = 0, j; i < six_to_nbuys; ++i) {
+			j = i;
+			a = j % 6; j /= 6;
+			b = j % 6; j /= 6;
+			c = j % 6; j /= 6;
+			d = j % 6; j /= 6;
+			e = j % 6; j /= 6;
 			na = a + o.items[0];
 			nb = b + o.items[1];
-			nc = c + o.
-			if ()
+			nc = c + o.items[2];
+			nd = d + o.items[3];
+			ne = e + o.items[4];
+			if (isValid(na, nb, nc, nd, ne) && minprice[a][b][c][d][e] + o.price < minprice[na][nb][nc][nd][ne])
+				minprice[na][nb][nc][nd][ne] = minprice[a][b][c][d][e] + o.price;
 		}
 	}
 
@@ -84,6 +88,18 @@ int main()
 		o.price = p;
 		offers.push_back(o);
 	}
+
+	six_to_nbuys = (int)std::pow(6, nbuys);
+	for (int i = 0, j,a,b,c,d,e; i < six_to_nbuys; ++i) {
+		j = i;
+		a = j % 6; j /= 6;
+		b = j % 6; j /= 6;
+		c = j % 6; j /= 6;
+		d = j % 6; j /= 6;
+		e = j % 6; j /= 6;
+		minprice[a][b][c][d][e] = 999 * 25;
+	}
+	minprice[0][0][0][0][0] = 0;
 
 	dp();
 
