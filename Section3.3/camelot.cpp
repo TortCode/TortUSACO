@@ -70,8 +70,8 @@ int min_moves(int r, int c)
 	int ret = 0;
 	int kingmove = 1000;
 	for (Position k : knights) {
-		for (int i = -3; i <= 3; ++i) {
-			for (int j = -3; j <= 3; ++j) {
+		for (int i = -2; i <= 2; ++i) {
+			for (int j = -2; j <= 2; ++j) {
 				kingmove = min(kingmove,
 					max(abs(i),abs(j))
 					+ dist[abs(k.f - king.f - i)][abs(k.s - king.s - j)]
@@ -82,7 +82,7 @@ int min_moves(int r, int c)
 		}
 		ret += dist[abs(k.f - r)][abs(k.s - c)];
 	}
-	ret += kingmove;
+	ret = min(ret + kingmove, ret + max(abs(king.f-r), abs(king.s-c)));
 	return ret;
 }
 
@@ -99,10 +99,6 @@ int main()
 	king.second = c - 'A';
 	while (input >> c >> r)
 		knights.push_back({ r - 1, c - 'A' });
-	if (knights.empty()) {
-		output << 0 << endl;
-		return 0;
-	}
 	dijkstra();
 
 	int leastmove = -1;
